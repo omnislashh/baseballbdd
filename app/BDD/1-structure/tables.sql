@@ -1,0 +1,33 @@
+USE baseballbdd;
+
+ALTER TABLE plaTea DROP CONSTRAINT platea_ibfk_1;
+ALTER TABLE plaTea DROP CONSTRAINT platea_ibfk_2;
+
+DROP TABLE IF EXISTS players;
+CREATE TABLE players(
+    idPla INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    firstName VARCHAR(128) NOT NULL,	
+    num DECIMAL(5) NOT NULL,
+    position VARCHAR(128) NOT NULL,
+    PRIMARY KEY(idPla)
+) ENGINE=InnoDB;
+
+DROP TABLE IF EXISTS teams;
+CREATE TABLE teams(
+    idTea INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    zoneTeam VARCHAR(128) NOT NULL,
+    libTeam VARCHAR(128) NOT NULL,
+    PRIMARY KEY(idTea)
+) Engine=InnoDB;
+
+DROP TABLE IF EXISTS plaTea;
+CREATE TABLE plaTea(
+    idPla INT UNSIGNED NOT NULL,
+    idTea INT UNSIGNED NOT NULL,
+    PRIMARY KEY(idPla, idTea),
+    FOREIGN KEY(idPla) REFERENCES pla(idPla),
+    FOREIGN KEY(idTea) REFERENCES teams(idTea)
+) Engine=InnoDB;
+
+ALTER TABLE players
+ADD LastName VARCHAR(128) NOT NULL;
