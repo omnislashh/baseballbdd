@@ -6,8 +6,9 @@ ALTER TABLE plaTea DROP CONSTRAINT platea_ibfk_2;
 DROP TABLE IF EXISTS players;
 CREATE TABLE players(
     idPla INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    firstName VARCHAR(128) NOT NULL,	
-    num DECIMAL(5) NOT NULL,
+    firstName VARCHAR(128) NOT NULL,
+    lastName VARCHAR(128) NOT NULL,
+    num INT(5) NOT NULL,
     position VARCHAR(128) NOT NULL,
     PRIMARY KEY(idPla)
 ) ENGINE=InnoDB;
@@ -25,9 +26,7 @@ CREATE TABLE plaTea(
     idPla INT UNSIGNED NOT NULL,
     idTea INT UNSIGNED NOT NULL,
     PRIMARY KEY(idPla, idTea),
-    FOREIGN KEY(idPla) REFERENCES pla(idPla),
+    FOREIGN KEY(idPla) REFERENCES players(idPla),
     FOREIGN KEY(idTea) REFERENCES teams(idTea)
 ) Engine=InnoDB;
 
-ALTER TABLE players
-ADD LastName VARCHAR(128) NOT NULL;
